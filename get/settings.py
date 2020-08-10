@@ -20,8 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'zpgu%ty6c-89+ma-ez*hq$zu1-*tm5n25-e#d&mc4_u2#5j^y1'
+# SECURITY WARNING: keep the secret key used in production secret
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -133,21 +132,5 @@ CART_SESSION_ID = 'cart'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-BRAINTREE_MERCHANT_ID = 'b9pnpp9rpbx6gfwp'  # Merchant ID
-BRAINTREE_PUBLIC_KEY = 'ry5qcwm46xvgpfnb'   # Public Key
-BRAINTREE_PRIVATE_KEY = '8a1fcc27cea4abd130be9094483e8aa9'  # Private key
-BRAINTREE_CONF = braintree.Configuration(
-    braintree.Environment.Sandbox,
-    BRAINTREE_MERCHANT_ID,
-    BRAINTREE_PUBLIC_KEY,
-    BRAINTREE_PRIVATE_KEY
-)
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'nishimahto@gmail.com'
-EMAIL_HOST_PASSWORD = 'fhyrxccdliqldtsx'
 
 

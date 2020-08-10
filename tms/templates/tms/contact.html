@@ -1,0 +1,103 @@
+
+{% load static %}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Great Escapes Travel</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="{% static 'css/tms.css' %}" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Page</title>
+    <style>
+
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-4">
+  <a href="/" class="navbar-brand">Great Escapes</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active"><a class=nav-link href="/">Home</a></li>
+      <li class="nav-item active"><a class=nav-link href="">Flights</a></li>
+      <li class="nav-item active"><a class=nav-link href="">Hotels</a></li>
+      <li class="nav-item active"><a class=nav-link href="">Rental car</a></li>
+      <li class="nav-item active"><a class=nav-link href="{% url 'tms:product_list' %}">Buy</a></li>
+      <li class="nav-item active"><a class=nav-link href="{% url 'tms:contact' %}">Contact Us</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      {% if user.is_authenticated %}
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="{% url 'cart:cart_detail' %}" class="nav-link navbar-link-2 waves-effect" style="color:navajowhite ">
+            <span class="badge badge-pill red" >1</span>
+            <i class="glyphicon glyphicon-shopping-cart white" ></i>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+          </div>
+        </li>
+      </ul>
+      {% else %}
+      <form class="form-inline my-2 my-lg-0">
+        <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log In</a>
+        <a href="{% url 'tms:register' %}" class="btn btn-primary ml-2">Sign Up</a>
+      </form>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+<div class="main">
+    <div class="google-maps mb-10">
+        {% if message_name %}
+        <center>
+            <h2>Thanks {{ message_name }}</h2>
+            <p>We received your email and will respond shortly.</p>
+        </center>
+        <br/><br/><br/>
+        {% else %}
+        <div class="contact location">
+            <h5>Address</h5>
+            <p>6001 Dodge St, Omaha, NE 68182</p>
+            <h5>Phone</h5>
+            <p>+1.402.554.2800</p>
+            <h5>Email</h5>
+            <p>xxxx@unomaha.edu</p>
+        </div>
+        <div class="contact contact-form">
+            <div class="section-heading">
+                <div id="contact_title">Get In Touch </div>
+                <div calss="line"></div>
+            </div>
+
+            <form method="post" action="{% url 'tms:contact' %}">
+                {% csrf_token %}
+                <div class="">
+                    <input type="text" name="message-name" class="form-control1" placeholder="Your Name">
+                </div>
+                <div class="">
+                    <input type="email" name="message-email" class="form-control1" placeholder="Your Email">
+                </div>
+	                <textarea name="message" class = "form-control2" placeholder="Your Message"></textarea>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary ml-2">Send Message</button>
+                </div>
+            </form>
+        </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d23994.603449878538!2d-96.01945963001363!3d41.258249700000015!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4dbea6a55857784f!2sUniversity%20of%20Nebraska%20Omaha!5e0!3m2!1sen!2sus!4v1595909007554!5m2!1sen!2sus" width="1200" height="450" frameborder="0" style="text-align: cente; border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></div>
+
+</div>
+    {% endif %}
+</div>
+</body>
